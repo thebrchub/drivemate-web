@@ -27,8 +27,8 @@ const Hero: React.FC = () => {
             {/* Dynamic Typography */}
             <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight leading-[1.05] mb-6 text-zinc-900 dark:text-white">
               Your digital <br />
-              garage, <br />
-              <span className="text-[#F46B2C]">perfected.</span>
+              garage, <span className="text-[#F46B2C]">perfected.</span><br />
+              
             </h1>
             
             <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 mb-8 max-w-xl leading-relaxed font-medium">
