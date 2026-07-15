@@ -1,23 +1,61 @@
 import React from 'react';
+import { motion, type Variants } from 'framer-motion';
 
 const MultiVehicle: React.FC = () => {
+  // Apple-style buttery smooth easing curve
+  const customEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+  // Variants for the Section Header
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: customEase } 
+    }
+  };
+
+  // Stagger variants for the Grid Cards
+  const gridContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+    }
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.8, ease: customEase } 
+    }
+  };
+
   return (
     <section className="relative w-full py-12 lg:py-16 bg-transparent transition-colors duration-500 overflow-hidden">
       
-      {/* 
-        The top transition is seamlessly handled by the background color 
-        matching the bottom curve of the LocalFirst component.
-      */}
-
-      {/* Background Accents */}
+      {/* Background Accents (Now Animated) */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[800px] h-[300px] bg-[#F46B2C]/5 blur-[120px] rounded-[100%] mix-blend-screen" />
+        <motion.div 
+          animate={{ scale: [1, 1.05, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+          className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[800px] h-[300px] bg-[#F46B2C]/5 blur-[120px] rounded-[100%] mix-blend-screen" 
+        />
       </div>
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10 text-center">
         
         {/* Section Header */}
-        <div className="mb-16 lg:mb-24">
+        <motion.div 
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16 lg:mb-24"
+        >
           <h2 className="text-[#F46B2C] font-bold tracking-widest text-sm uppercase mb-4">
             Unified Dashboard
           </h2>
@@ -28,13 +66,19 @@ const MultiVehicle: React.FC = () => {
           <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-medium max-w-2xl mx-auto leading-relaxed">
             Whether it's your daily commuter, your weekend ride, or your family SUV—manage their entire lifecycle from a single, beautiful interface.
           </p>
-        </div>
+        </motion.div>
 
         {/* Vehicle Type Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <motion.div 
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+        >
           
           {/* Card 1: Car */}
-          <div className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center">
+          <motion.div variants={cardVariants} className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#F46B2C]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <div className="relative w-24 h-24 mb-8 flex items-center justify-center">
@@ -54,10 +98,10 @@ const MultiVehicle: React.FC = () => {
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">SUVs</span>
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">Hatchbacks</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 2: Bike */}
-          <div className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center transform md:-translate-y-8">
+          <motion.div variants={cardVariants} className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center transform md:-translate-y-8">
             {/* Special glowing accent for the center card to break grid monotony */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#F46B2C] to-[#ff8c56]"></div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#F46B2C]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -79,10 +123,10 @@ const MultiVehicle: React.FC = () => {
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">Cruisers</span>
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">Off-Road</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 3: Scooter */}
-          <div className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center">
+          <motion.div variants={cardVariants} className="group relative bg-white dark:bg-[#1a1a1a] rounded-[2.5rem] p-8 lg:p-10 border border-zinc-200 dark:border-zinc-800/80 shadow-xl hover:shadow-2xl hover:border-[#F46B2C]/30 transition-all duration-500 overflow-hidden flex flex-col items-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#F46B2C]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <div className="relative w-24 h-24 mb-8 flex items-center justify-center">
@@ -102,24 +146,10 @@ const MultiVehicle: React.FC = () => {
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">Electric</span>
               <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-full text-xs font-semibold text-zinc-500 dark:text-zinc-400">Commuter</span>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
       </div>
-
-      {/* --- BOTTOM SVG CURVE DIVIDER --- */}
-      {/* 
-        This cuts into the background color of the NEXT section (e.g., CTA or Footer).
-        I've set it to text-zinc-50 dark:text-[#0a0a0a] to seamlessly transition back to deep black.
-      */}
-      {/* <svg 
-        className="absolute bottom-0 left-0 w-full h-[8vh] min-h-[60px] max-h-[120px] text-zinc-50 dark:text-[#0a0a0a] z-30 drop-shadow-2xl translate-y-[1px] transition-colors duration-500" 
-        viewBox="0 0 1440 200" 
-        fill="currentColor" 
-        preserveAspectRatio="none"
-      >
-        <path d="M0,200 L1440,200 L1440,0 C1100,250 400,250 0,100 Z" />
-      </svg> */}
     </section>
   );
 };
