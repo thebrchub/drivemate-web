@@ -15,6 +15,11 @@ const GlobalBackground: React.FC = () => {
       */}
       <motion.div 
         style={{ y }}
+        /* === NEW: Cinematic Blur Reveal Animation === */
+        initial={{ opacity: 0, filter: 'blur(24px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+        /* ============================================ */
         className="absolute inset-[-10%] w-[120%] h-[120%]"
       >
         {/* 1. Light Mode Background Image */}
