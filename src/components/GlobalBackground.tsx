@@ -19,14 +19,14 @@ const GlobalBackground: React.FC = () => {
       >
         {/* 1. Light Mode Background Image */}
         <img 
-          src="/images/hero_bg_light.png" 
+          src="/images/hero_bg_light.webp" 
           alt="Light Theme Background" 
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out opacity-100 dark:opacity-0"
         />
 
         {/* 2. Dark Mode Background Image */}
         <img 
-          src="/images/hero_bg_dark.png" 
+          src="/images/hero_bg_dark.webp" 
           alt="Dark Theme Background" 
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out opacity-0 dark:opacity-100"
         />

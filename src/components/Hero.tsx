@@ -67,13 +67,13 @@ const Hero: React.FC = () => {
             {/* === SECONDARY MOCKUP (Background/Right) === */}
             {/* Light Mode Image */}
             <img 
-              src="/images/your_secondary_mockup_light.png" 
+              src="/images/your_secondary_mockup_light.webp" 
               alt="DriveMate Secondary App View Light" 
               className="absolute top-[10%] right-[-5%] w-[220px] lg:w-[260px] z-10 transform translate-y-4 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-opacity duration-500 opacity-100 dark:opacity-0" 
             />
             {/* Dark Mode Image */}
             <img 
-              src="/images/your_secondary_mockup_dark.png" 
+              src="/images/your_secondary_mockup_dark.webp" 
               alt="DriveMate Secondary App View Dark" 
               className="absolute top-[10%] right-[-5%] w-[220px] lg:w-[260px] z-10 transform translate-y-4 drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)] transition-opacity duration-500 opacity-0 dark:opacity-100" 
             />
@@ -81,13 +81,13 @@ const Hero: React.FC = () => {
             {/* === PRIMARY MOCKUP (Foreground/Left) === */}
             {/* Light Mode Image */}
             <img 
-              src="/images/your_primary_mockup_light.png" 
+              src="/images/your_primary_mockup_light.webp" 
               alt="DriveMate Primary App View Light" 
               className="absolute top-[2%] right-[30%] w-[240px] lg:w-[290px] z-20 drop-shadow-[0_30px_50px_rgba(0,0,0,0.4)] transition-opacity duration-500 opacity-100 dark:opacity-0" 
             />
             {/* Dark Mode Image */}
             <img 
-              src="/images/your_primary_mockup_dark.png" 
+              src="/images/your_primary_mockup_dark.webp" 
               alt="DriveMate Primary App View Dark" 
               className="absolute top-[2%] right-[30%] w-[240px] lg:w-[290px] z-20 drop-shadow-[0_30px_50px_rgba(0,0,0,0.9)] transition-opacity duration-500 opacity-0 dark:opacity-100" 
             />
