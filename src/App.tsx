@@ -23,13 +23,12 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// 2. We extract the routes into a separate component so we can use the useLocation hook!
+// 2. We extract the routes into a separate component so we can use the useLocation hook
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
     // mode="wait" ensures the old page fully fades out before the new one fades in
-    // onExitComplete ensures the user is scrolled to the very top of the new page
     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
@@ -49,7 +48,8 @@ function App() {
           
           <Navbar />
           
-          <main className="flex-grow flex flex-col relative overflow-hidden">
+          {/* FIX: Removed 'overflow-hidden' from this main tag so the sticky phone works perfectly! */}
+          <main className="flex-grow flex flex-col relative">
             <AnimatedRoutes />
           </main>
 

@@ -11,7 +11,7 @@ const ProductShowcase: React.FC = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // FIX: Explicitly typed as a 4-number tuple!
+  // Explicitly typed as a 4-number tuple
   const customEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
   const features = [
@@ -130,14 +130,8 @@ const ProductShowcase: React.FC = () => {
           {/* Right Column: Sticky Mockup Container (Desktop Only) */}
           <div className="hidden md:flex w-1/2 sticky top-0 h-screen items-center justify-center pointer-events-none">
             
-            {/* The Device Frame - Spring loaded entrance */}
-            <motion.div 
-              initial={{ opacity: 0, y: 120, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, type: "spring", bounce: 0.3 }}
-              className="relative w-[320px] lg:w-[360px] aspect-[1/2.1] bg-zinc-900 dark:bg-black rounded-[3rem] border-[10px] border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden pointer-events-auto"
-            >
+            {/* FIX: The Device Frame is now perfectly static (No motion wrapper on the container) */}
+            <div className="relative w-[320px] lg:w-[360px] aspect-[1/2.1] bg-zinc-900 dark:bg-black rounded-[3rem] border-[10px] border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden pointer-events-auto">
               
               {/* Dynamic Island / Notch */}
               <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-7 bg-zinc-200 dark:bg-black rounded-full z-30 shadow-inner"></div>
@@ -166,7 +160,7 @@ const ProductShowcase: React.FC = () => {
 
               {/* Fake Screen Glare */}
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none z-40"></div>
-            </motion.div>
+            </div>
 
           </div>
 
