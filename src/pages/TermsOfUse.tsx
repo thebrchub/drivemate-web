@@ -8,12 +8,12 @@ const TermsOfUse: React.FC = () => {
         
         {/* Header */}
         <div className="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#F46B2C] hover:text-[#da5515] transition-colors mb-6">
+          {/* <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#F46B2C] hover:text-[#da5515] transition-colors mb-6">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Home
-          </Link>
+          </Link> */}
           <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight mb-4">
             Terms of Use
           </h1>
