@@ -1,19 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const TermsOfUse: React.FC = () => {
+  // Grab the search params to check if we are loading inside the Flutter app
+  const [searchParams] = useSearchParams();
+  const isAppMode = searchParams.get('mode') === 'app';
+
   return (
-    <div className="pt-32 pb-24 bg-zinc-50 dark:bg-[#0a0a0a] min-h-screen transition-colors duration-500">
+    // Dynamically change the top padding: tight (pt-8) for app, spacious (pt-32) for web
+    <div className={`${isAppMode ? 'pt-8' : 'pt-32'} pb-24 bg-zinc-50 dark:bg-[#0a0a0a] min-h-screen transition-colors duration-500`}>
       <div className="container mx-auto px-6 max-w-3xl relative z-10">
         
         {/* Header */}
         <div className="mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-8">
-          {/* <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#F46B2C] hover:text-[#da5515] transition-colors mb-6">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </Link> */}
           <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight mb-4">
             Terms of Use
           </h1>
@@ -79,18 +78,21 @@ const TermsOfUse: React.FC = () => {
             </p>
           </section>
 
-          <section className="bg-zinc-100 dark:bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 mt-12">
-            <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">8. Contact Information</h2>
-            <p className="mb-4">
-              If you have any questions about these Terms, please contact our support team.
-            </p>
-            <p className="text-zinc-900 dark:text-white font-semibold">
-              BRC HUB LLP
-            </p>
-            <Link to="/contact" className="text-[#F46B2C] hover:text-[#da5515] transition-colors font-semibold mt-2 inline-block">
-              Submit a Query &rarr;
-            </Link>
-          </section>
+          {/* Hide the Contact Information section entirely if viewed inside the Flutter app */}
+          {!isAppMode && (
+            <section className="bg-zinc-100 dark:bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 mt-12">
+              <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">8. Contact Information</h2>
+              <p className="mb-4">
+                If you have any questions about these Terms, please contact our support team.
+              </p>
+              <p className="text-zinc-900 dark:text-white font-semibold">
+                BRC HUB LLP
+              </p>
+              <Link to="/contact" className="text-[#F46B2C] hover:text-[#da5515] transition-colors font-semibold mt-2 inline-block">
+                Submit a Query &rarr;
+              </Link>
+            </section>
+          )}
 
         </div>
       </div>
