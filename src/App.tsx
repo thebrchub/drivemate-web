@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
@@ -44,6 +45,20 @@ const AnimatedRoutes = () => {
 const Layout = () => {
   const [searchParams] = useSearchParams();
   const isAppMode = searchParams.get('mode') === 'app';
+  const appTheme = searchParams.get('theme'); // Get the theme from Flutter!
+
+  // --- FORCE TAILWIND TO MATCH FLUTTER THEME ---
+  useEffect(() => {
+    if (isAppMode && appTheme) {
+      if (appTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else if (appTheme === 'light') {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, [isAppMode, appTheme]);
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
