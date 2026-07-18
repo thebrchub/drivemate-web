@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
         {/* Giant Half-Cut Background Text */}
         <div className="absolute bottom-0 left-0 w-full flex justify-center pointer-events-none select-none">
           <h1 className="text-[17vw] font-black leading-[0.75] tracking-tighter text-zinc-100 dark:text-zinc-950 translate-y-[28%]">
-            DRIVEMATE
+            QUANTACEL
           </h1>
         </div>
         

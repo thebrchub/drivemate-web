@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
@@ -40,22 +40,33 @@ const AnimatedRoutes = () => {
   );
 };
 
+// 3. NEW: A Layout component so we can use URL Search Params inside the Router
+const Layout = () => {
+  const [searchParams] = useSearchParams();
+  const isAppMode = searchParams.get('mode') === 'app';
+
+  return (
+    <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
+      
+      {/* Hide Navbar if loading inside the Flutter App */}
+      {!isAppMode && <Navbar />}
+      
+      <main className="flex-grow flex flex-col relative">
+        <AnimatedRoutes />
+      </main>
+
+      {/* Hide Footer if loading inside the Flutter App */}
+      {!isAppMode && <Footer />}
+      
+    </div>
+  );
+};
+
 function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300">
-          
-          <Navbar />
-          
-          {/* FIX: Removed 'overflow-hidden' from this main tag so the sticky phone works perfectly! */}
-          <main className="flex-grow flex flex-col relative">
-            <AnimatedRoutes />
-          </main>
-
-          <Footer />
-          
-        </div>
+        <Layout />
       </Router>
     </ThemeProvider>
   );

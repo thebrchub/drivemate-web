@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
   const location = useLocation();
+
+  // Smart Scroll Logic
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    
+    // If scrolling down AND past the 100px mark, hide the navbar
+    if (latest > previous && latest > 100) {
+      setHidden(true);
+    } else {
+      // If scrolling up or at the very top, show the navbar
+      setHidden(false);
+    }
+  });
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -15,17 +32,38 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none">
+    <motion.div 
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-150%" } // Slides completely out of view (including padding)
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none"
+    >
       <nav className="pointer-events-auto flex items-center justify-between w-full max-w-4xl px-6 py-3 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-full shadow-lg dark:shadow-black/20 transition-colors duration-300">
         
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center shadow-[0_0_15px_rgba(244,107,44,0.4)] group-hover:scale-105 transition-transform">
-            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+        <Link to="/" className="flex items-center gap-2.5 group" aria-label="Quantacel">
+          {/* Logo Container */}
+          <div className="relative w-9 h-9 shrink-0">
+            {/* Light Mode Logo (Visible in light, fades out in dark) */}
+            <img 
+              src="/images/logo_w.png" 
+              alt="Quantacel Icon" 
+              className="absolute inset-0 w-full h-full object-contain transition-all duration-500 opacity-100 dark:opacity-0 group-hover:scale-105"
+            />
+            
+            {/* Dark Mode Logo (Hidden in light, fades in in dark) */}
+            <img 
+              src="/images/logo_d.png" 
+              alt="Quantacel Icon" 
+              className="absolute inset-0 w-full h-full object-contain transition-all duration-500 opacity-0 dark:opacity-100 group-hover:scale-105"
+            />
           </div>
-          <span className="font-bold text-lg tracking-tight text-zinc-900 dark:text-white">
-            DriveMate
+          
+          {/* App Name */}
+          <span className="font-bold text-xl tracking-tight text-zinc-900 dark:text-white group-hover:text-[#F46B2C] dark:group-hover:text-[#F46B2C] transition-colors duration-300">
+            Quantacel
           </span>
         </Link>
 
@@ -63,13 +101,13 @@ const Navbar: React.FC = () => {
           
           <a
             href="#download"
-            className="hidden sm:inline-flex items-center justify-center px-5 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-semibold hover:bg-brand dark:hover:bg-brand hover:text-white transition-colors duration-200"
+            className="hidden sm:inline-flex items-center justify-center px-5 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-semibold hover:bg-[#F46B2C] dark:hover:bg-[#F46B2C] hover:text-white dark:hover:text-white transition-colors duration-200"
           >
             Get App
           </a>
         </div>
       </nav>
-    </div>
+    </motion.div>
   );
 };
 

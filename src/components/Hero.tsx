@@ -121,13 +121,13 @@ const Hero: React.FC = () => {
               >
                 {/* Light Mode Image */}
                 <img 
-                  src="/images/your_secondary_mockup_light.webp" 
+                  src="/images/your_secondary_mockup_light.png" 
                   alt="DriveMate Secondary App View Light" 
                   className="w-full h-auto transition-opacity duration-500 opacity-100 dark:opacity-0" 
                 />
                 {/* Dark Mode Image */}
                 <img 
-                  src="/images/your_secondary_mockup_dark.webp" 
+                  src="/images/your_secondary_mockup_dark.png" 
                   alt="DriveMate Secondary App View Dark" 
                   className="absolute inset-0 w-full h-auto transition-opacity duration-500 opacity-0 dark:opacity-100" 
                 />
@@ -150,13 +150,13 @@ const Hero: React.FC = () => {
               >
                 {/* Light Mode Image */}
                 <img 
-                  src="/images/your_primary_mockup_light.webp" 
+                  src="/images/your_primary_mockup_light.png" 
                   alt="DriveMate Primary App View Light" 
                   className="w-full h-auto transition-opacity duration-500 opacity-100 dark:opacity-0" 
                 />
                 {/* Dark Mode Image */}
                 <img 
-                  src="/images/your_primary_mockup_dark.webp" 
+                  src="/images/your_primary_mockup_dark.png" 
                   alt="DriveMate Primary App View Dark" 
                   className="absolute inset-0 w-full h-auto transition-opacity duration-500 opacity-0 dark:opacity-100" 
                 />
